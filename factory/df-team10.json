@@ -1,0 +1,9 @@
+{
+	"name": "df-team10",
+	"location": "eastus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "19e2ddc9-a013-49c2-ae00-1709788f5f06",
+		"tenantId": "d57d32cc-c121-488f-b07b-dfe705680c71"
+	}
+}
