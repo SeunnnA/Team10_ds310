@@ -23,6 +23,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'accountKey' of 'AzureDataLakeStorage2'"
 		},
+		"AzureDataLakeStorage3_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'AzureDataLakeStorage3'"
+		},
 		"AzureSqlDatabase1_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'AzureSqlDatabase1'"
@@ -36,6 +40,10 @@
 			"defaultValue": "https://team10storage.dfs.core.windows.net/"
 		},
 		"AzureDataLakeStorage2_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://team10storage.dfs.core.windows.net/"
+		},
+		"AzureDataLakeStorage3_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://team10storage.dfs.core.windows.net/"
 		}
@@ -99,6 +107,23 @@
 					"accountKey": {
 						"type": "SecureString",
 						"value": "[parameters('AzureDataLakeStorage2_accountKey')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureDataLakeStorage3')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobFS",
+				"typeProperties": {
+					"url": "[parameters('AzureDataLakeStorage3_properties_typeProperties_url')]",
+					"accountKey": {
+						"type": "SecureString",
+						"value": "[parameters('AzureDataLakeStorage3_accountKey')]"
 					}
 				}
 			},
@@ -698,6 +723,264 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/Parquet10')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureDataLakeStorage2",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Parquet",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileName": "recoveries.parquet",
+						"fileSystem": "ods-metricandpolicy"
+					},
+					"compressionCodec": "snappy"
+				},
+				"schema": [
+					{
+						"name": "ID",
+						"type": "INT32"
+					},
+					{
+						"name": "Updated",
+						"type": "DATE"
+					},
+					{
+						"name": "Confirmed",
+						"type": "INT32"
+					},
+					{
+						"name": "Confirmed_Change",
+						"type": "INT32"
+					},
+					{
+						"name": "Deaths",
+						"type": "INT32"
+					},
+					{
+						"name": "Deaths_Change",
+						"type": "INT32"
+					},
+					{
+						"name": "Recovered",
+						"type": "INT32"
+					},
+					{
+						"name": "Recovered_Change",
+						"type": "INT32"
+					},
+					{
+						"name": "Latitude",
+						"type": "DECIMAL",
+						"precision": 10,
+						"scale": 5
+					},
+					{
+						"name": "Longitude",
+						"type": "DECIMAL",
+						"precision": 10,
+						"scale": 5
+					},
+					{
+						"name": "ISO2",
+						"type": "UTF8"
+					},
+					{
+						"name": "ISO3",
+						"type": "UTF8"
+					},
+					{
+						"name": "Country_Region",
+						"type": "UTF8"
+					},
+					{
+						"name": "load_time",
+						"type": "INT96"
+					}
+				]
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureDataLakeStorage2')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Parquet11')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureDataLakeStorage2",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Parquet",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileName": "deaths.parquet",
+						"fileSystem": "ods-metricandpolicy"
+					},
+					"compressionCodec": "snappy"
+				},
+				"schema": [
+					{
+						"name": "ID",
+						"type": "INT32"
+					},
+					{
+						"name": "Updated",
+						"type": "DATE"
+					},
+					{
+						"name": "Confirmed",
+						"type": "INT32"
+					},
+					{
+						"name": "Confirmed_Change",
+						"type": "INT32"
+					},
+					{
+						"name": "Deaths",
+						"type": "INT32"
+					},
+					{
+						"name": "Deaths_Change",
+						"type": "INT32"
+					},
+					{
+						"name": "Recovered",
+						"type": "INT32"
+					},
+					{
+						"name": "Recovered_Change",
+						"type": "INT32"
+					},
+					{
+						"name": "Latitude",
+						"type": "DECIMAL",
+						"precision": 10,
+						"scale": 5
+					},
+					{
+						"name": "Longitude",
+						"type": "DECIMAL",
+						"precision": 10,
+						"scale": 5
+					},
+					{
+						"name": "ISO2",
+						"type": "UTF8"
+					},
+					{
+						"name": "ISO3",
+						"type": "UTF8"
+					},
+					{
+						"name": "Country_Region",
+						"type": "UTF8"
+					},
+					{
+						"name": "load_time",
+						"type": "INT96"
+					}
+				]
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureDataLakeStorage2')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Parquet12')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureDataLakeStorage2",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Parquet",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileName": "cases.parquet",
+						"fileSystem": "ods-metricandpolicy"
+					},
+					"compressionCodec": "snappy"
+				},
+				"schema": [
+					{
+						"name": "ID",
+						"type": "INT32"
+					},
+					{
+						"name": "Updated",
+						"type": "DATE"
+					},
+					{
+						"name": "Confirmed",
+						"type": "INT32"
+					},
+					{
+						"name": "Confirmed_Change",
+						"type": "INT32"
+					},
+					{
+						"name": "Deaths",
+						"type": "INT32"
+					},
+					{
+						"name": "Deaths_Change",
+						"type": "INT32"
+					},
+					{
+						"name": "Recovered",
+						"type": "INT32"
+					},
+					{
+						"name": "Recovered_Change",
+						"type": "INT32"
+					},
+					{
+						"name": "Latitude",
+						"type": "DECIMAL",
+						"precision": 10,
+						"scale": 5
+					},
+					{
+						"name": "Longitude",
+						"type": "DECIMAL",
+						"precision": 10,
+						"scale": 5
+					},
+					{
+						"name": "ISO2",
+						"type": "UTF8"
+					},
+					{
+						"name": "ISO3",
+						"type": "UTF8"
+					},
+					{
+						"name": "Country_Region",
+						"type": "UTF8"
+					},
+					{
+						"name": "load_time",
+						"type": "INT96"
+					}
+				]
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureDataLakeStorage2')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/Parquet2')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -761,184 +1044,6 @@
 					"location": {
 						"type": "AzureBlobFSLocation",
 						"fileSystem": "vmdata"
-					},
-					"compressionCodec": "snappy"
-				},
-				"schema": []
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/AzureDataLakeStorage2')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/Parquet5')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "AzureDataLakeStorage2",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "Parquet",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobFSLocation",
-						"fileSystem": "vmdata"
-					},
-					"compressionCodec": "snappy"
-				},
-				"schema": []
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/AzureDataLakeStorage2')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/Parquet6')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "AzureDataLakeStorage2",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "Parquet",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobFSLocation",
-						"fileSystem": "ods-metricandpolicy"
-					},
-					"compressionCodec": "snappy"
-				},
-				"schema": []
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/AzureDataLakeStorage2')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/Parquet7')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "AzureDataLakeStorage2",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "Parquet",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobFSLocation",
-						"fileName": "dates.parquet",
-						"fileSystem": "azuresqldata"
-					},
-					"compressionCodec": "snappy"
-				},
-				"schema": [
-					{
-						"name": "DateKey",
-						"type": "INT32"
-					},
-					{
-						"name": "FullDate",
-						"type": "DATE"
-					},
-					{
-						"name": "isWeekDay",
-						"type": "BOOLEAN"
-					},
-					{
-						"name": "DayOfWeek",
-						"type": "INT32"
-					},
-					{
-						"name": "DayOfMonth",
-						"type": "INT32"
-					},
-					{
-						"name": "DayOfQuarter",
-						"type": "INT32"
-					},
-					{
-						"name": "DayOfYear",
-						"type": "INT32"
-					},
-					{
-						"name": "DayName",
-						"type": "UTF8"
-					},
-					{
-						"name": "WeekOfYear",
-						"type": "INT32"
-					},
-					{
-						"name": "WeekName",
-						"type": "UTF8"
-					},
-					{
-						"name": "MonthOfYear",
-						"type": "INT32"
-					},
-					{
-						"name": "MonthName",
-						"type": "UTF8"
-					},
-					{
-						"name": "CalendarQuarter",
-						"type": "INT32"
-					},
-					{
-						"name": "CalendarQuarterName",
-						"type": "UTF8"
-					},
-					{
-						"name": "CalendarYear",
-						"type": "INT32"
-					},
-					{
-						"name": "FiscalMonth",
-						"type": "INT32"
-					},
-					{
-						"name": "FiscalMonthName",
-						"type": "UTF8"
-					},
-					{
-						"name": "FiscalQuarter",
-						"type": "INT32"
-					},
-					{
-						"name": "FiscalQuarterName",
-						"type": "UTF8"
-					},
-					{
-						"name": "FiscalYear",
-						"type": "INT32"
-					}
-				]
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/AzureDataLakeStorage2')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/odsparquet1')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "AzureDataLakeStorage2",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "Parquet",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobFSLocation",
-						"fileSystem": "ods-metricandpolicy"
 					},
 					"compressionCodec": "snappy"
 				},
