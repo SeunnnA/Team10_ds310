@@ -3,7 +3,7 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "Country",
+				"name": "Geography",
 				"type": "Copy",
 				"dependsOn": [],
 				"policy": {
