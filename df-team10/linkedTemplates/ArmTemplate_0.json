@@ -925,7 +925,7 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/odsparquet')]",
+			"name": "[concat(parameters('factoryName'), '/odsparquet1')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
