@@ -1,0 +1,190 @@
+{
+	"name": "dataflow1",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "vm_metrics",
+						"type": "DatasetReference"
+					},
+					"name": "vmmetrics"
+				},
+				{
+					"dataset": {
+						"referenceName": "Parquet9",
+						"type": "DatasetReference"
+					},
+					"name": "azuremetrics"
+				}
+			],
+			"sinks": [
+				{
+					"name": "cases"
+				},
+				{
+					"name": "deaths"
+				},
+				{
+					"name": "recoveries"
+				}
+			],
+			"transformations": [
+				{
+					"name": "union"
+				},
+				{
+					"name": "select1"
+				},
+				{
+					"name": "select2"
+				},
+				{
+					"name": "select3"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          ID as integer,",
+				"          Updated as date,",
+				"          Confirmed as integer,",
+				"          Confirmed_Change as integer,",
+				"          Deaths as integer,",
+				"          Deaths_Change as integer,",
+				"          Recovered as integer,",
+				"          Recovered_Change as integer,",
+				"          Latitude as decimal(10,5),",
+				"          Longitude as decimal(10,5),",
+				"          ISO2 as string,",
+				"          ISO3 as string,",
+				"          Country_Region as string,",
+				"          load_time as timestamp",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false,",
+				"     format: 'parquet') ~> vmmetrics",
+				"source(output(",
+				"          ID as integer,",
+				"          Updated as date,",
+				"          Confirmed as integer,",
+				"          Confirmed_Change as integer,",
+				"          Deaths as integer,",
+				"          Deaths_Change as integer,",
+				"          Recovered as integer,",
+				"          Recovered_Change as integer,",
+				"          Latitude as decimal(10,5),",
+				"          Longitude as decimal(10,5),",
+				"          ISO2 as string,",
+				"          ISO3 as string,",
+				"          Country_Region as string,",
+				"          load_time as timestamp",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false,",
+				"     format: 'parquet') ~> azuremetrics",
+				"vmmetrics, azuremetrics union(byName: true)~> union",
+				"union select(mapColumn(",
+				"          ID,",
+				"          Updated,",
+				"          Confirmed,",
+				"          Confirmed_Change,",
+				"          Deaths,",
+				"          Deaths_Change,",
+				"          Recovered,",
+				"          Recovered_Change,",
+				"          Latitude,",
+				"          Longitude,",
+				"          ISO2,",
+				"          ISO3,",
+				"          Country_Region,",
+				"          load_time",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select1",
+				"union select(mapColumn(",
+				"          ID,",
+				"          Updated,",
+				"          Confirmed,",
+				"          Confirmed_Change,",
+				"          Deaths,",
+				"          Deaths_Change,",
+				"          Recovered,",
+				"          Recovered_Change,",
+				"          Latitude,",
+				"          Longitude,",
+				"          ISO2,",
+				"          ISO3,",
+				"          Country_Region,",
+				"          load_time",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select2",
+				"union select(mapColumn(",
+				"          ID,",
+				"          Updated,",
+				"          Confirmed,",
+				"          Confirmed_Change,",
+				"          Deaths,",
+				"          Deaths_Change,",
+				"          Recovered,",
+				"          Recovered_Change,",
+				"          Latitude,",
+				"          Longitude,",
+				"          ISO2,",
+				"          ISO3,",
+				"          Country_Region,",
+				"          load_time",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select3",
+				"select1 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     mapColumn(",
+				"          ID,",
+				"          Updated,",
+				"          Confirmed,",
+				"          Confirmed_Change,",
+				"          Deaths,",
+				"          Deaths_Change,",
+				"          Recovered,",
+				"          Recovered_Change,",
+				"          Latitude,",
+				"          Longitude,",
+				"          ISO2,",
+				"          ISO3,",
+				"          Country_Region,",
+				"          load_time",
+				"     )) ~> cases",
+				"select2 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> deaths",
+				"select3 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     mapColumn(",
+				"          ID,",
+				"          Updated,",
+				"          Confirmed,",
+				"          Confirmed_Change,",
+				"          Deaths,",
+				"          Deaths_Change,",
+				"          Recovered,",
+				"          Recovered_Change,",
+				"          Latitude,",
+				"          Longitude,",
+				"          ISO2,",
+				"          ISO3,",
+				"          Country_Region,",
+				"          load_time",
+				"     )) ~> recoveries"
+			]
+		}
+	}
+}
