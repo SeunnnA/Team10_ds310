@@ -73,7 +73,7 @@
 					"sink": {
 						"type": "ParquetSink",
 						"storeSettings": {
-							"type": "AzureBlobStorageWriteSettings"
+							"type": "AzureBlobFSWriteSettings"
 						},
 						"formatSettings": {
 							"type": "ParquetWriteSettings"
@@ -97,7 +97,7 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "Parquet2",
+						"referenceName": "Parquet6",
 						"type": "DatasetReference"
 					}
 				]
@@ -123,7 +123,7 @@
 					"sink": {
 						"type": "ParquetSink",
 						"storeSettings": {
-							"type": "AzureBlobStorageWriteSettings"
+							"type": "AzureBlobFSWriteSettings"
 						},
 						"formatSettings": {
 							"type": "ParquetWriteSettings"
@@ -147,14 +147,14 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "Parquet2",
+						"referenceName": "Parquet7",
 						"type": "DatasetReference"
 					}
 				]
 			}
 		],
 		"annotations": [],
-		"lastPublishTime": "2024-03-29T19:27:24Z"
+		"lastPublishTime": "2024-04-02T22:29:09Z"
 	},
 	"type": "Microsoft.DataFactory/factories/pipelines"
 }
