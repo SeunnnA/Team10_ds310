@@ -943,7 +943,8 @@
 											"path": "$['RegionName']"
 										},
 										"sink": {
-											"name": "RegionName"
+											"name": "RegionName",
+											"type": "String"
 										}
 									},
 									{
@@ -951,7 +952,8 @@
 											"path": "$['RegionCode']"
 										},
 										"sink": {
-											"name": "RegionCode"
+											"name": "RegionCode",
+											"type": "Int64"
 										}
 									},
 									{
@@ -967,7 +969,8 @@
 											"path": "$['Date']"
 										},
 										"sink": {
-											"name": "Date"
+											"name": "Date",
+											"type": "DateTime"
 										}
 									},
 									{
