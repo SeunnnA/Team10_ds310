@@ -41,13 +41,13 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "Country",
+						"referenceName": "SQLCountry",
 						"type": "DatasetReference"
 					}
 				],
 				"outputs": [
 					{
-						"referenceName": "Parquet2",
+						"referenceName": "ODSGeoParquet",
 						"type": "DatasetReference"
 					}
 				]
@@ -91,13 +91,13 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "Dates",
+						"referenceName": "SQLDates",
 						"type": "DatasetReference"
 					}
 				],
 				"outputs": [
 					{
-						"referenceName": "Parquet7",
+						"referenceName": "ODSDatesParquet",
 						"type": "DatasetReference"
 					}
 				]
@@ -147,20 +147,20 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "Parquet8",
+						"referenceName": "Cosmos_policydata_sink",
 						"type": "DatasetReference"
 					}
 				],
 				"outputs": [
 					{
-						"referenceName": "policy_ods",
+						"referenceName": "ODSPolicyParquet",
 						"type": "DatasetReference"
 					}
 				]
 			}
 		],
 		"annotations": [],
-		"lastPublishTime": "2024-04-02T22:29:09Z"
+		"lastPublishTime": "2024-04-10T19:33:45Z"
 	},
 	"type": "Microsoft.DataFactory/factories/pipelines"
 }

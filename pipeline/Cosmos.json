@@ -527,14 +527,14 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "Parquet1",
+						"referenceName": "Cosmos_policydata_sink",
 						"type": "DatasetReference"
 					}
 				]
 			}
 		],
 		"annotations": [],
-		"lastPublishTime": "2024-03-28T00:14:25Z"
+		"lastPublishTime": "2024-04-08T20:50:49Z"
 	},
 	"type": "Microsoft.DataFactory/factories/pipelines"
 }

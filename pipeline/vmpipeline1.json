@@ -47,7 +47,7 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "Parquet3",
+						"referenceName": "VMcountry_data_sink",
 						"type": "DatasetReference"
 					}
 				]
@@ -97,7 +97,7 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "Parquet4",
+						"referenceName": "VMcovid_metrics_sink",
 						"type": "DatasetReference"
 					}
 				]
@@ -147,14 +147,14 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "Parquet5",
+						"referenceName": "VMdates_sink",
 						"type": "DatasetReference"
 					}
 				]
 			}
 		],
 		"annotations": [],
-		"lastPublishTime": "2024-03-29T18:44:31Z"
+		"lastPublishTime": "2024-04-08T20:29:15Z"
 	},
 	"type": "Microsoft.DataFactory/factories/pipelines"
 }

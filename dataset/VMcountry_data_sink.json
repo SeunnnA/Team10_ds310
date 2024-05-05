@@ -1,5 +1,5 @@
 {
-	"name": "Parquet6",
+	"name": "VMcountry_data_sink",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "AzureDataLakeStorage2",
@@ -10,7 +10,7 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
-				"fileSystem": "ods-metricandpolicy"
+				"fileSystem": "vmdata"
 			},
 			"compressionCodec": "snappy"
 		},

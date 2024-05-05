@@ -1,5 +1,5 @@
 {
-	"name": "vm_metrics",
+	"name": "SQLcovid_parquet",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "AzureDataLakeStorage2",
@@ -10,8 +10,8 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
-				"fileName": "dbo.Covid19_Metrics.parquet",
-				"fileSystem": "vmdata"
+				"fileName": "covid.parquet",
+				"fileSystem": "azuresqldata"
 			},
 			"compressionCodec": "snappy"
 		},

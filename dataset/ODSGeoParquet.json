@@ -1,16 +1,17 @@
 {
-	"name": "Parquet6",
+	"name": "ODSGeoParquet",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "AzureDataLakeStorage2",
+			"referenceName": "AzureBlobStorage2",
 			"type": "LinkedServiceReference"
 		},
 		"annotations": [],
 		"type": "Parquet",
 		"typeProperties": {
 			"location": {
-				"type": "AzureBlobFSLocation",
-				"fileSystem": "ods-metricandpolicy"
+				"type": "AzureBlobStorageLocation",
+				"fileName": "geography.parquet",
+				"container": "ods-metricandpolicy"
 			},
 			"compressionCodec": "snappy"
 		},
